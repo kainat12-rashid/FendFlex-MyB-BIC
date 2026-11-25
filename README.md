@@ -1,26 +1,85 @@
-# Fendflex Personal Safety Hub
+# FendFlex – Personal Emergency Safety Wearable
 
-Implement exactly the screenshot and nothing else
+**Her-Hackathon 2026 | MyB-BIC**
 
-This project was built with [Lovable](https://lovable.dev).
+## 1. Problem Statement
 
-**Live app**: https://fendflex-personal-safety-hub.lovable.app
+Personal safety is a major concern in everyday life. During emergencies, people may struggle to access their phones, contact trusted people, or share their location quickly. Traditional safety solutions may require several steps, causing delays when immediate assistance is needed.
 
-## Build with Lovable
+## 2. Our Solution
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/c0aa053f-c9c6-40ca-8df2-8e23e89a1649).
+FendFlex is a proposed smart personal safety wearable designed to help people send emergency alerts and share their location with trusted contacts.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+It combines discreet SOS activation, voice-code activation, and location-sharing capabilities in wearable accessories such as bracelets, keychains, rings, necklaces, and children's watches.
 
-## Development
+Our project demonstrates the concept through an interactive website and virtual prototype.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## 3. Main Features
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+- **Discreet SOS Button:** Initiates an emergency alert.
+- **Voice-Code Activation:** Demonstrates emergency activation through a predefined voice code.
+- **Live Location Concept:** Displays location information on an interactive map.
+- **Emergency Contacts:** Includes family members and emergency contacts.
+- **Location Tracking:** Demonstrates the concept of tracking a registered device.
+- **Multiple Wearable Designs:** Bracelet, keychain, ring, necklace, hairpin, and children's watch.
+- **Interactive Demo:** Allows users to explore the emergency alert workflow.
+
+## 4. Technology Stack
+
+- Frontend: React.js
+- Programming Language: JavaScript / TypeScript (depending on implementation)
+- Styling: Tailwind CSS
+- Development Platform: Lovable
+- Version Control: GitHub
+
+## 5. Setup Instructions
+
+### Prerequisites
+- Node.js
+- npm
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+   `git clone YOUR_GITHUB_REPOSITORY_URL`
+
+2. Open the project folder:
+
+   `cd FendFlex-MyB-BIC`
+
+3. Install dependencies:
+
+   `npm install`
+
+4. Start the development server:
+
+   `npm run dev`
+
+5. Open the local URL displayed in your terminal.
+
+## 6. How to Run or Demonstrate
+
+1. Open the FendFlex website.
+2. Explore the homepage and wearable products.
+3. Navigate to the How It Works section.
+4. Open the interactive demo.
+5. Select or activate the SOS demonstration.
+6. Observe the simulated emergency alert.
+7. Explore location display and emergency contact features.
+
+**Note:** FendFlex is currently a virtual prototype and concept demonstration. Physical hardware integration, actual GPS tracking, and real emergency message delivery require further hardware and backend development.
+
+## Project Information
+
+**Project Name:** FendFlex  
+**Competition:** Her-Hackathon 2026  
+**Category:** Business-Oriented SaaS Product  
+**Organization:** MyB-BIC  
+
+**Team Members:** Kainat Rashid, Sidra Hayyat
+
+**GitHub Repository:** https://github.com/kainat12-rashid/FendFlex-MyB-BIC
+
+**Live Demo:** https://fendflex-personal-safety-hub.lovable.app
