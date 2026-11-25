@@ -1,23 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import {createFileRoute,Link} from '@tanstack/react-router';
+import {ArrowRight,ArrowUpRight,Play,ShieldCheck,Lock,MapPin,Fingerprint,Radio,Heart,Check,Shield,Activity} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {ProductCard} from '@/components/product-card';
+import {products,pageHead} from '@/lib/products';
+import hero from '@/assets/hero.asset.json';
+export const Route=createFileRoute('/')({head:()=>pageHead('FendFlex — Your Safety. Your Freedom.','Discover discreet personal safety wearables and experience the FendFlex virtual SOS demonstration.',hero.url),component:Home});
+function Home(){return <main><section className="hero"><img src={hero.url} className="hero-photo" alt="FendFlex black silicone safety bracelet with a silver titanium clasp and illuminated shield"/><div className="site-width hero-content fade-in"><div className="eyebrow">Confidence you can wear</div><h1>Your Safety.<br/>Your Freedom.<br/><span>Your Everyday<br className="sm:hidden"/> Companion.</span></h1><p className="hero-description">Life is meant to be lived. Meet the smart safety wearables that keep your loved ones a little closer — wherever your day takes you.</p><div className="hero-actions"><Button asChild><Link to="/products">Explore products <ArrowUpRight/></Link></Button><Button asChild variant="outline"><Link to="/demo"><Play className="size-3"/> Try live demo</Link></Button></div><div className="micro-proof"><span><ShieldCheck/>Discreet by design</span><span><Lock/>Privacy first</span><span><Heart/>Always by your side</span></div></div><div className="hero-label">FendFlex Smart Bracelet<small>DESIGNED TO BLEND IN. BUILT TO STAND BY YOU.</small></div></section><section className="trust-strip"><div className="site-width trust-items">{[[ShieldCheck,'One-touch SOS'],[MapPin,'Permission-based location'],[Radio,'Connected to your circle'],[Fingerprint,'Your data. Your control.']].map(([Icon,label])=>{const I=Icon as typeof ShieldCheck;return <div className="trust-item" key={String(label)}><I/><span>{String(label)}</span></div>})}</div></section><section className="section"><div className="site-width"><div className="section-heading"><div><div className="eyebrow">The FendFlex collection</div><h2>Different styles. One purpose.</h2><p className="section-subtitle">Personal safety that fits your life, not the other way around.</p></div><Button asChild variant="link" className="text-xs text-muted-foreground"><Link to="/products">View all devices <ArrowRight/></Link></Button></div><div className="product-grid">{products.slice(0,3).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section><section className="band section"><div className="site-width"><div className="section-heading"><div><div className="eyebrow">Simple by design</div><h2>A small action. A stronger connection.</h2><p className="section-subtitle">When words are hard to find, your FendFlex speaks for you.</p></div><Button asChild variant="link" className="text-xs"><Link to="/how-it-works">How it works <ArrowRight/></Link></Button></div><div className="steps-grid">{[[Shield,'Wear it your way','A discreet companion that moves with you.'],[Fingerprint,'Activate your SOS','A hidden button or your secret voice code.'],[MapPin,'Share your location','Only with your permission. Always in your control.'],[Heart,'Reach your people','Your trusted circle sees your simulated alert.']].map(([Icon,title,copy],i)=>{const I=Icon as typeof Shield;return <div key={String(title)}><div className="step-number">0{i+1} —</div><I className="step-icon"/><h3>{String(title)}</h3><p>{String(copy)}</p></div>})}</div></div></section><section className="section"><div className="site-width grid md:grid-cols-2 gap-12"><div><div className="eyebrow">More freedom. Less worry.</div><h2>Peace of mind shouldn't<br/>hold you back.</h2><p className="section-subtitle max-w-md">The walk home. The early commute. The next adventure. FendFlex imagines a world where staying connected feels effortless.</p></div><div className="grid gap-6">{[[Lock,'Private, by default','No hidden tracking. You decide when your location is shared.'],[Activity,'Ready for the everyday','Thoughtful wearable concepts, designed around real life.'],[Heart,'Your people, within reach','A personal circle of contacts, chosen by you.']].map(([Icon,title,copy])=>{const I=Icon as typeof Lock;return <div className="flex gap-5" key={String(title)}><I className="text-cyan shrink-0 size-5"/><div><h3 className="text-sm font-semibold">{String(title)}</h3><p className="section-subtitle mt-2">{String(copy)}</p></div></div>})}</div></div></section><section className="band cta-band"><div className="eyebrow justify-center mb-4">Experience FendFlex</div><h2>See a little peace of mind in action.</h2><p className="section-subtitle mb-7">Explore the interactive virtual device. No hardware needed.</p><Button asChild size="lg"><Link to="/demo">Try the live demo <ArrowUpRight/></Link></Button><p className="text-muted-foreground text-[10px] mt-5 flex justify-center items-center gap-2"><Check className="size-3"/>Safe simulation · No actual messages or emergency dispatch</p></section></main>}

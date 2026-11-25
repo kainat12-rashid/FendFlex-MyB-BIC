@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+ 
+## Application architecture
+- Keep public product and demo pages outside the authenticated layout so they remain shareable and server-rendered.
+- Store private account data through the generated browser client under owner-only database policies; the client-only authenticated layout prevents SSR session redirect loops.
+- Keep the SOS state machine and location watcher in the shared safety demo, with pure activation rules in a separate testable module, so public and signed-in demos behave consistently.
+- Treat satellite artwork as illustrative rather than a georeferenced map; actual browser coordinates link to an external map to avoid misrepresenting the user's position.

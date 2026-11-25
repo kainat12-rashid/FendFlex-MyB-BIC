@@ -1,0 +1,6 @@
+import {createFileRoute,Link,notFound} from '@tanstack/react-router';
+import {Check,ArrowUpRight} from 'lucide-react';
+import {products,pageHead} from '@/lib/products';
+import {Button} from '@/components/ui/button';
+export const Route=createFileRoute('/products/$slug')({loader:({params})=>{const p=products.find(p=>p.slug===params.slug);if(!p)throw notFound();return p},head:({loaderData})=>pageHead(loaderData?.name??'Device unavailable',loaderData?.description??'This FendFlex device could not be found.',loaderData?.image),component:Detail});
+function Detail(){const p=Route.useLoaderData();return <main className="site-width"><div className="pt-7 text-xs text-muted-foreground"><Link to="/products">Collection</Link> / {p.name}</div><div className="product-detail"><img src={p.image} alt={`FendFlex ${p.name} concept photograph`}/><div><div className="eyebrow">{p.tag}</div><h1>{p.name}</h1><p>{p.description}</p><ul>{['Discreet SOS activation concept','5-second cancellation window','Permission-based location sharing','Alerts to your chosen trusted contacts'].map(t=><li key={t}><Check/>{t}</li>)}</ul><Button asChild size="lg"><Link to="/demo">Experience the virtual device <ArrowUpRight/></Link></Button><p className="text-xs mt-5">Concept only. No physical device is connected or for sale.</p></div></div></main>}

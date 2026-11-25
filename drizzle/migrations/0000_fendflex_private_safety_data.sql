@@ -1,0 +1,16 @@
+CREATE TABLE public.profiles (id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE, display_name text NOT NULL DEFAULT '', voice_code text NOT NULL DEFAULT 'FendFlex help me', device text NOT NULL DEFAULT 'Smart Bracelet');
+GRANT SELECT, INSERT, UPDATE ON public.profiles TO authenticated; GRANT ALL ON public.profiles TO service_role;
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_profile ON public.profiles FOR ALL TO authenticated USING (auth.uid() = id) WITH CHECK (auth.uid() = id);
+CREATE FUNCTION public.create_safety_profile() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = '' AS $$ BEGIN INSERT INTO public.profiles(id,display_name) VALUES(NEW.id,coalesce(NEW.raw_user_meta_data->>'display_name','')); RETURN NEW; END; $$;
+CREATE TRIGGER create_safety_profile AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION public.create_safety_profile();
+CREATE TABLE public.contacts (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE, name text NOT NULL, phone text NOT NULL DEFAULT '', enabled boolean NOT NULL DEFAULT true);
+GRANT SELECT,INSERT,UPDATE,DELETE ON public.contacts TO authenticated; GRANT ALL ON public.contacts TO service_role;
+ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_contacts ON public.contacts FOR ALL TO authenticated USING(auth.uid()=user_id) WITH CHECK(auth.uid()=user_id);
+CREATE INDEX contacts_user_idx ON public.contacts(user_id);
+CREATE TABLE public.alerts (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), user_id uuid NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE, created_at timestamptz NOT NULL DEFAULT now(), status text NOT NULL, location text NOT NULL, message text NOT NULL);
+GRANT SELECT,INSERT,DELETE ON public.alerts TO authenticated; GRANT ALL ON public.alerts TO service_role;
+ALTER TABLE public.alerts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY own_alerts ON public.alerts FOR ALL TO authenticated USING(auth.uid()=user_id) WITH CHECK(auth.uid()=user_id);
+CREATE INDEX alerts_user_idx ON public.alerts(user_id);
